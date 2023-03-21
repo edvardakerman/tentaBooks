@@ -1,5 +1,5 @@
 
-public class Book {
+public abstract class Book {
 	private String name;
 	private int releaseDate;
 	private Author author;
@@ -37,30 +37,31 @@ public class Book {
 
 	public void printBookInfo() {
 		System.out.println(this.getName() + " Skriven av " + this.getAuthor().getName() + " Publicerad av "
-				+ this.getPublisher().getName()+ " För " + this.calculateYear(this.getReleaseDate()) + " år sedan ");
-		
+				+ this.getPublisher().getName() + " För " + this.calculateYear(this.getReleaseDate()) + " år sedan ");
+
 	}
 
 	public int getPages() {
 		return pages;
 	}
-	public void openBook(int page) {
+
+	public void checkpage(int page) {
 		if ((this.getPages() >= page) && page > 0) {
 			System.out.println("Boken öppnades på sidan " + page);
 		} else {
 			System.out.println("Sidan finns inte");
 		}
-			
-		
 	}
+
+	// Abstrakt metod, skrivs över i adultbook och cildrenbook
+	public abstract void openBook(int page, int age);
 
 	public static void setCurrentYear(int currentYear) {
 		Book.currentYear = currentYear;
 	}
-	
+
 	private int calculateYear(int releaseDate) {
-	return  Book.currentYear - releaseDate;	
+		return Book.currentYear - releaseDate;
 	}
-	
-	
+
 }
